@@ -1,42 +1,27 @@
 # Test Cases
 
-- 暂无
+- [缺失必须参数`--proposal-id`](./TestCase01.md)
+- [参数`--proposal-id`不合法](./TestCase02.md)
+- [正常查询抵押列表](./TestCase03.md)
+- [业务情景]暂无
 
-# Description
+## Description
+
 >     Query deposits on a proposal. 
-
+>
 >     查询对指定提案(proposal)的抵押存款(deposit)。
 
-# Example
+## Usage
 
-`qoscli query deposits <proposal-id>`
-
-查询编号为1的提议上的所有抵押：
 ```bash
-$ qoscli query deposits 1 --indent
-```
-
-查询结果：
-```bash
-[
-  {
-    "depositor": "address1ctmavdk57x0q7c9t98v7u79607222ars4qczcy",
-    "proposal_id": "1",
-    "amount": "100000000"
-  }
-]
-```
-
-# Usage
-```
   qoscli query deposits [proposal-id] [flags]
 ```
 
-# Available Commands
+## Available Commands
 
 >无可用命令
 
-# Flags
+## Flags
 
 | ShortCut | Flag           | Required | Input Type | Default Input             | Input Range | Description                             |
 |:---------|:---------------|:---------|:-----------|:--------------------------|:------------|:----------------------------------------|
@@ -47,7 +32,7 @@ $ qoscli query deposits 1 --indent
 | `-n`     | `--node`       | ✖        | string     | `"tcp://localhost:26657"` | -           | 为此链提供的Tendermint RPC接口: `<host>:<port>` |
 | -        | `--trust-node` | ✖        | -          | -                         | -           | 是否信任连接的完整节点（不验证其响应证据）                   |
 
-# Global Flags
+## Global Flags
 
 | ShortCut | Flag         | Required | Input Type | Default Input | Input Range       | Description  |
 |:---------|:-------------|:---------|:-----------|:--------------|:------------------|:-------------|

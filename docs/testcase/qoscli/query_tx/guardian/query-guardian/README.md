@@ -1,41 +1,27 @@
 # Test Cases
 
-- 暂无
+- [缺失必须参数`--name`，`--address`](./TestCase01.md)
+- [参数`--name`，`--address`不合法](./TestCase02.md)
+- [正常查询特权账户](./TestCase03.md)
+- [业务情景]暂无
 
-# Description
->     Query guardian.
+## Description
 
->     查询特权用户(guardian)。
+>Query guardian.
+>
+>查询特权用户(guardian)。
 
-# Example
+## Usage
 
-`qoscli query guardian <guardian_key_name_or_account_address>`
-
-查询`Arya`特权信息：
 ```bash
-$ qoscli query guardian Arya --indent
-```
-
-查询结果：
-```bash
-{
-  "description": "Arya",
-  "guardian_type": 1,
-  "address": "address1ctmavdk57x0q7c9t98v7u79607222ars4qczcy",
-  "creator": "address1ah9uz0"
-}
-```
-
-# Usage
-```
   qoscli query guardian [guardian] [flags]
 ```
 
-# Available Commands
+## Available Commands
 
 >无可用命令
 
-# Flags
+## Flags
 
 | ShortCut | Flag           | Required | Input Type | Default Input             | Input Range | Description                             |
 |:---------|:---------------|:---------|:-----------|:--------------------------|:------------|:----------------------------------------|
@@ -46,7 +32,7 @@ $ qoscli query guardian Arya --indent
 | `-n`     | `--node`       | ✖        | string     | `"tcp://localhost:26657"` | -           | 为此链提供的Tendermint RPC接口: `<host>:<port>` |
 | -        | `--trust-node` | ✖        | -          | -                         | -           | 是否信任连接的完整节点（不验证其响应证据）                   |
 
-# Global Flags
+## Global Flags
 
 | ShortCut | Flag         | Required | Input Type | Default Input | Input Range       | Description  |
 |:---------|:-------------|:---------|:-----------|:--------------|:------------------|:-------------|

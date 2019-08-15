@@ -1,42 +1,27 @@
 # Test Cases
 
-- 暂无
+- [缺失必须参数`address`，`deleted-by`](./TestCase01.md)
+- [参数`address`，`deleted-by`不合法](./TestCase02.md)
+- [正常删除特权账户](./TestCase03.md)
+- [业务情景](./TestCase04.md)
 
-# Description
+## Description
+
 >     Delete guardian.
-
+> 
 >     删除特权用户(guardian)。
 
-# Example
+## Usage
 
-> 下面实例中假设:
-> - `Arya` 地址为: `address1ctmavdk57x0q7c9t98v7u79607222ars4qczcy`
-> - `Sansa` 地址为: `address1t7eadnyl8g6ct9xyrasvz4rdztvkeqpc0hzujh`
-
-在`genesis.json`中配置的特权账户可通过下面的指令删除非`genesis.json`中配置的特权账户：
-
-`qoscli tx delete-guardian --address <new_guardian_key_name_or_account_address> --deleted-by <delete_operator_key_name_or_account_address>`
-
-主要参数：
-
-- `--address`         新特权账户，账户地址或密钥库中密钥名字
-- `--deleted-by`      删除操作账户，账户地址或密钥库中密钥名字
-
-`Arya`将`Sansa`从特权账户中删除：
 ```bash
-$ qoscli tx delete-guardian --address Sansa --deleted-by Arya
-```
-
-# Usage
-```
   qoscli tx delete-guardian [flags]
 ```
 
-# Available Commands
+## Available Commands
 
 >无可用命令
 
-# Flags
+## Flags
 
 | ShortCut | Flag                | Required | Input Type | Default Input             | Input Range | Description                                            |
 |:---------|:--------------------|:---------|:-----------|:--------------------------|:------------|:-------------------------------------------------------|
@@ -59,8 +44,7 @@ $ qoscli tx delete-guardian --address Sansa --deleted-by Arya
 | -        | `--address`         | ✖        | string     | -                         | -           | (主要参数)特权用户(guardian)地址                                       |
 | -        | `--deleted-by`      | ✖        | string     | -                         | -           | (主要参数)特权用户删除者地址。                                             |
 
-
-# Global Flags
+## Global Flags
 
 | ShortCut | Flag         | Required | Input Type | Default Input | Input Range       | Description  |
 |:---------|:-------------|:---------|:-----------|:--------------|:------------------|:-------------|

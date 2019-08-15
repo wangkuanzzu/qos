@@ -1,43 +1,25 @@
 # Test Cases
 
-- 暂无
+- [正常查询特权账户列表](./TestCase01.md)
+- [业务情景]暂无
 
-# Description
+## Description
+
 >     Query guardian list.
-
+>
 >     查询特权用户(guardian)列表。
 
-# Example
+## Usage
 
-`qoscli query guardians`
-
-查询所有特权账户：
 ```bash
-$ qoscli query guardians --indent
-```
-
-查询结果：
-```bash
-[
-  {
-    "description": "Arya",
-    "guardian_type": 1,
-    "address": "address1ctmavdk57x0q7c9t98v7u79607222ars4qczcy",
-    "creator": "address1ah9uz0"
-  }
-]
-```
-
-# Usage
-```
   qoscli query guardians [flags]
 ```
 
-# Available Commands
+## Available Commands
 
 >无可用命令
 
-# Flags
+## Flags
 
 | ShortCut | Flag           | Required | Input Type | Default Input             | Input Range | Description                             |
 |:---------|:---------------|:---------|:-----------|:--------------------------|:------------|:----------------------------------------|
@@ -48,7 +30,7 @@ $ qoscli query guardians --indent
 | `-n`     | `--node`       | ✖        | string     | `"tcp://localhost:26657"` | -           | 为此链提供的Tendermint RPC接口: `<host>:<port>` |
 | -        | `--trust-node` | ✖        | -          | -                         | -           | 是否信任连接的完整节点（不验证其响应证据）                   |
 
-# Global Flags
+## Global Flags
 
 | ShortCut | Flag         | Required | Input Type | Default Input | Input Range       | Description  |
 |:---------|:-------------|:---------|:-----------|:--------------|:------------------|:-------------|

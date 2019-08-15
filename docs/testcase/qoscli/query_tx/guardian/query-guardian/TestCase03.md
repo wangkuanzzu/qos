@@ -1,14 +1,10 @@
-# test case of qoscli query guardian
+# Description
 
-> `qoscli query guardian` 查询特权账户
+```text
+  特权账户查询，查询单个guardian，可以通过指定keys_name 或是 account_address。
+```
 
----
-
-## 情景说明
-
-特权账户查询，查询单个guardian，可以通过指定keys_name 或是 account_address。
-
-## 测试命令
+## Input
 
 ```bash
     //本地密钥库中存在账户abc ，可以使用key_name查询
@@ -18,7 +14,7 @@
     qoscli query guardian address10xwx06gnrt3dlz7hfrx6a8wx3gyeghxm54rv7a
 ```
 
-## 测试结果
+## Output
 
 ```bash
     qoscli query guardian abc

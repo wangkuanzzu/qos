@@ -1,29 +1,14 @@
 # Test Cases
 
-- 暂无
+- [缺失必须参数`--proposal-id`，`--depositor`](./TestCase01.md)
+- [参数`--proposal-id`，`--depositor`不合法](./TestCase02.md)
+- [正常查询抵押](./TestCase03.md)
+- [业务情景]暂无
 
 # Description
 >     Query details of a deposit. 
-
+> 
 >     查询单个抵押存款(deposit)的详细信息 。
-
-# Example
-
-`qoscli query deposit <proposal-id> <depositer>`
-
-查询`Arya`在编号为1的提议上的抵押：
-```bash
-$ qoscli query deposit 1 Arya --indent
-```
-
-查询结果：
-```bash
-{
-  "depositor": "address1ctmavdk57x0q7c9t98v7u79607222ars4qczcy",
-  "proposal_id": "1",
-  "amount": "100000000"
-}
-```
 
 # Usage
 ```

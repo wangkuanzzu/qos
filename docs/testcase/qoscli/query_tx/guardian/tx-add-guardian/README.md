@@ -1,43 +1,27 @@
 # Test Cases
 
-- 暂无
+- [缺失必须参数`address`，`creator`，`description`](./TestCase01.md)
+- [参数`address`，`creator`，`description`不合法](./TestCase02.md)
+- [正常添加特权账户](./TestCase03.md)
+- [业务情景](./TestCase04.md)
 
-# Description
+## Description
+
 >     Add guardian.
-
+>
 >     添加特权用户(guardian)。
 
-# Example
+## Usage
 
-> 下面实例中假设:
-> - `Arya` 地址为: `address1ctmavdk57x0q7c9t98v7u79607222ars4qczcy`
-> - `Sansa` 地址为: `address1t7eadnyl8g6ct9xyrasvz4rdztvkeqpc0hzujh`
-
-在`genesis.json`中配置的特权账户可通过下面的添加指令添加新的特权账户：
-
-`qoscli tx add-guardian --address <new_guardian_key_name_or_account_address> --creator <creator_key_name_or_account_address> --description <description>`
-
-主要参数：
-
-- `--address`         新特权账户，账户地址或密钥库中密钥名字
-- `--creator`         创建账户，账户地址或密钥库中密钥名字
-- `--description`     描述
-
-`Arya`添加`Sansa`为特权账户：
 ```bash
-$ qoscli tx add-guardian --address Sansa --creator Arya --description 'set Sansa to be a guardian'
-```
-
-# Usage
-```
   qoscli tx add-guardian [flags]
 ```
 
-# Available Commands
+## Available Commands
 
 >无可用命令
 
-# Flags
+## Flags
 
 | ShortCut | Flag                | Required | Input Type | Default Input             | Input Range | Description                                            |
 |:---------|:--------------------|:---------|:-----------|:--------------------------|:------------|:-------------------------------------------------------|
@@ -61,8 +45,7 @@ $ qoscli tx add-guardian --address Sansa --creator Arya --description 'set Sansa
 | -        | `--creator`         | ✖        | string     | -                         | -           | (主要参数)特权用户创造者地址。                                             |
 | -        | `--description`     | ✖        | string     | -                         | -           | (主要参数)提案描述                                                   |
 
-
-# Global Flags
+## Global Flags
 
 | ShortCut | Flag         | Required | Input Type | Default Input | Input Range       | Description  |
 |:---------|:-------------|:---------|:-----------|:--------------|:------------------|:-------------|
