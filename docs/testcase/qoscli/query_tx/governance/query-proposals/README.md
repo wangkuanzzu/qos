@@ -1,72 +1,39 @@
 # Test Cases
 
-- 暂无
+- [正常查询参数](./TestCase01.md)
+- [业务情景]暂无
 
-# Description
+## Description
+
 >     Query for a all proposals. 
-
+>
 >     使用可选的筛选器查询提案(proposal)。
 
 您可以使用以下Flag标志筛选返回值:
-```
+
+```bash
 $ qos query gov proposals --depositor wzj
 ```
-```
+
+```bash
 $ qos query gov proposals --voter wzj
 ```
-```
+
+```bash
 $ qos query gov proposals --status (DepositPeriod|VotingPeriod|Passed|Rejected).
 ```
 
-# Example
+## Usage
 
-`qoscli query proposals`
-
-查询所有提议：
 ```bash
-$ qoscli query proposals
-```
-
-查询结果：
-```bash
-[
-  {
-    "proposal_content": {
-      "type": "gov/TextProposal",
-      "value": {
-        "title": "update qos",
-        "description": "this is the description",
-        "deposit": "100000000"
-      }
-    },
-    "proposal_id": "1",
-    "proposal_status": 2,
-    "final_tally_result": {
-      "yes": "0",
-      "abstain": "0",
-      "no": "0",
-      "no_with_veto": "0"
-    },
-    "submit_time": "2019-04-03T08:20:34.99523986Z",
-    "deposit_end_time": "2019-04-05T08:20:34.99523986Z",
-    "total_deposit": "200000000",
-    "voting_start_time": "2019-04-03T08:20:34.99523986Z",
-    "voting_start_height": "700",
-    "voting_end_time": "2019-04-05T08:20:34.99523986Z"
-  }
-]
-```
-
-# Usage
-```
   qoscli query proposals [flags]
 ```
 
-# Available Commands
+## Available Commands
 
 >无可用命令
 
-# Flags
+## Flags
 
 | ShortCut | Flag           | Required | Input Type | Default Input             | Input Range                                             | Description                             |
 |:---------|:---------------|:---------|:-----------|:--------------------------|:--------------------------------------------------------|:----------------------------------------|
@@ -81,8 +48,7 @@ $ qoscli query proposals
 | -        | `--status`     | ✖        | string     | -                         | `deposit_period`, `voting_period`, `passed`, `rejected` | (主要参数)按提案的状态筛选                          |
 | -        | `--voter`      | ✖        | string     | -                         | -                                                       | (主要参数)按投票表决的提案筛选                        |
 
-
-# Global Flags
+## Global Flags
 
 | ShortCut | Flag         | Required | Input Type | Default Input | Input Range       | Description  |
 |:---------|:-------------|:---------|:-----------|:--------------|:------------------|:-------------|

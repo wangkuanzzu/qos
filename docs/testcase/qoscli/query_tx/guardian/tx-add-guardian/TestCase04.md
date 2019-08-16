@@ -18,6 +18,13 @@
     qoscli tx add-guardian --address hij --creator def --description 'set hij to be a guardian'
 ```
 
+## 预测结果
+
+```text
+    1. 添加特权账户成功，返回tx信息。
+    2. 添加特权账户失败，def不是存在genesis文件中的系统账户，权限不足。
+```
+
 ## 测试结果
 
 ```bash

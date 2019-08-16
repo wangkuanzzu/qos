@@ -1,43 +1,26 @@
 # Test Cases
 
-- 暂无
+- [缺失必须参数](./TestCase01.md)
+- [参数不合法](./TestCase02.md)
+- [正常抵押提议](./TestCase03.md)
+- [业务情景](./TestCase04.md)
 
-# Description
+## Description
 >     deposit.
-
+>
 >     向提案抵押存款。
 
-# Example
+## Usage
 
-> 下面实例中假设:
-> - `Arya` 地址为: `address1ctmavdk57x0q7c9t98v7u79607222ars4qczcy`
-> - `Sansa` 地址为: `address1t7eadnyl8g6ct9xyrasvz4rdztvkeqpc0hzujh`
-
-提议在抵押、投票阶段都可以执行下面的抵押交易：
-
-`qoscli tx deposit --proposal-id <proposal_id> --depositor <depositor_key_name_or_account_address> --amount <amount_of_qos>`
-
-主要参数：
-
-- `--proposal-id`       提议ID
-- `--depositor`         抵押账户，地址或密钥库名字
-- `--amount`            抵押QOS数量
-
-`Arya`抵押100000个QOS到3号提议：
-```bash
-$ qoscli tx deposit --proposal-id 1 --depositor Arya --amount 100000
-```
-
-# Usage
 ```
   qoscli tx deposit [flags]
 ```
 
-# Available Commands
+## Available Commands
 
 >无可用命令
 
-# Flags
+## Flags
 
 | ShortCut | Flag                | Input Type | Default Input             | Input Range | Description                                                |
 |:---------|:--------------------|:-----------|:--------------------------|:------------|:-----------------------------------------------------------|
@@ -65,8 +48,7 @@ $ qoscli tx deposit --proposal-id 1 --depositor Arya --amount 100000
 | -        | `--depositor`       | ✖        | uint       | -                         | -           | (主要参数)抵押人。                                                   |
 | -        | `--proposal-id`     | ✖        | uint       | -                         | -           | (主要参数)提案ID                                                   |
 
-
-# Global Flags
+## Global Flags
 
 | ShortCut | Flag         | Required | Input Type | Default Input | Input Range       | Description  |
 |:---------|:-------------|:---------|:-----------|:--------------|:------------------|:-------------|

@@ -1,61 +1,29 @@
 # Test Cases
 
-- 暂无
+- [缺失必须参数`--id`](./TestCase01.md)
+- [参数`--id`不合法](./TestCase02.md)
+- [正常查询参数](./TestCase03.md)
+- [业务情景]暂无
 
-# Description
+## Description
+
 >     Query details of a signal proposal.
-
+> 
 >     查询单个提案(proposal)的详细信息。
 
-# Example
+## Usage
 
-`qoscli query proposal <proposal-id>`
-
-查询`ProposalID`为1的提议：
 ```bash
-$ qoscli query proposal 1 --indent
-```
-
-查询结果：
-```bash
-{
-  "proposal_content": {
-    "type": "gov/TextProposal",
-    "value": {
-      "title": "update qos",
-      "description": "this is the description",
-      "deposit": "100000000"
-    }
-  },
-  "proposal_id": "1",
-  "proposal_status": 2,
-  "final_tally_result": {
-    "yes": "0",
-    "abstain": "0",
-    "no": "0",
-    "no_with_veto": "0"
-  },
-  "submit_time": "2019-04-03T08:20:34.99523986Z",
-  "deposit_end_time": "2019-04-05T08:20:34.99523986Z",
-  "total_deposit": "200000000",
-  "voting_start_time": "2019-04-03T08:20:34.99523986Z",
-  "voting_start_height": "700",
-  "voting_end_time": "2019-04-05T08:20:34.99523986Z"
-}
-```
-
-# Usage
-```
   qoscli query proposal [id] [flags]
 ```
 
 `[id]`为提案的`ProposalID`
 
-# Available Commands
+## Available Commands
 
 >无可用命令
 
-# Flags
+## Flags
 
 | ShortCut | Flag           | Required | Input Type | Default Input             | Input Range | Description                             |
 |:---------|:---------------|:---------|:-----------|:--------------------------|:------------|:----------------------------------------|
@@ -66,7 +34,7 @@ $ qoscli query proposal 1 --indent
 | `-n`     | `--node`       | ✖        | string     | `"tcp://localhost:26657"` | -           | 为此链提供的Tendermint RPC接口: `<host>:<port>` |
 | -        | `--trust-node` | ✖        | -          | -                         | -           | 是否信任连接的完整节点（不验证其响应证据）                   |
 
-# Global Flags
+## Global Flags
 
 | ShortCut | Flag         | Required | Input Type | Default Input | Input Range       | Description  |
 |:---------|:-------------|:---------|:-----------|:--------------|:------------------|:-------------|

@@ -18,6 +18,13 @@
     qoscli tx delete-guardian --address def --deleted-by abc
 ```
 
+## 预测结果
+
+```text
+    1. 删除特权账户失败，def不是存在genesis文件中的系统账户，权限不足。
+    2. 删除特权账户成功，返回tx信息。
+```
+
 ## 测试结果
 
 ```bash

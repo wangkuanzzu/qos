@@ -1,41 +1,27 @@
 # Test Cases
 
-- 暂无
+- [缺失必须参数`--id`](./TestCase01.md)
+- [参数`--id`不合法](./TestCase02.md)
+- [正常查询投票结果](./TestCase03.md)
+- [业务情景]暂无
 
-# Description
+## Description
+
 >     Get the tally of a proposal vote. 
-
+>
 >     获得提案投票的计票结果。
 
-# Example
+## Usage
 
-`qoscli query tally <proposal-id>`
-
-查询编号为1的提议上实时统计结果：
-```bash
-$ qoscli query tally 1 --indent
-```
-
-查询结果：
-```bash
-{
-  "yes": "100",
-  "abstain": "0",
-  "no": "0",
-  "no_with_veto": "0"
-}
-```
-
-# Usage
 ```
   qoscli query tally [proposal-id] [flags]
 ```
 
-# Available Commands
+## Available Commands
 
 >无可用命令
 
-# Flags
+## Flags
 
 | ShortCut | Flag           | Required | Input Type | Default Input             | Input Range | Description                             |
 |:---------|:---------------|:---------|:-----------|:--------------------------|:------------|:----------------------------------------|
@@ -46,7 +32,7 @@ $ qoscli query tally 1 --indent
 | `-n`     | `--node`       | ✖        | string     | `"tcp://localhost:26657"` | -           | 为此链提供的Tendermint RPC接口: `<host>:<port>` |
 | -        | `--trust-node` | ✖        | -          | -                         | -           | 是否信任连接的完整节点（不验证其响应证据）                   |
 
-# Global Flags
+## Global Flags
 
 | ShortCut | Flag         | Required | Input Type | Default Input | Input Range       | Description  |
 |:---------|:-------------|:---------|:-----------|:--------------|:------------------|:-------------|
