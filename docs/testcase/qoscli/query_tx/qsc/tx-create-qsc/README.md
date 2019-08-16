@@ -3,6 +3,7 @@
 - [缺失必须参数`--creator`，`--qsc.crt`](./TestCase01.md)
 - [参数`--creator`，`--qsc.crt`不合法](./TestCase02.md)
 - [正常创建QSC联盟币](./TestCase03.md)
+- [业务情景](./TestCase04.md)
 
 # Description
 >     create qsc.

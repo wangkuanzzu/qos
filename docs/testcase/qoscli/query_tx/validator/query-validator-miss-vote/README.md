@@ -1,6 +1,9 @@
 # Test Cases
 
-- 暂无
+- [缺失必须参数](./TestCase01.md)
+- [参数不合法](./TestCase02.md)
+- [正常查询验证节点](./TestCase03.md)
+- [业务情景]
 
 # Description
 >     Query validator miss vote info in the nearest voting window.

@@ -4,6 +4,7 @@
 - [参数`--coins`不合法](./TestCase02.md)
 - [参数`--from`，`--to`不合法](./TestCase03.md)
 - [正常增加预授权](./TestCase04.md)
+- [业务场景](./TestCase05.md)
 
 # Description
 >     Increase approve.

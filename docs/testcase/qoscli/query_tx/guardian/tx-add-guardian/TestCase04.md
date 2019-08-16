@@ -11,11 +11,28 @@
 ## 测试命令
 
 ```bash
+    //查询所有系统账户
+    qoscli query guardians
+
     //账户abc是配置在genesis.json文件中的特权账户
     qoscli tx add-guardian --address def --creator abc --description 'set def to be a guardian'
 
+    //查询所有系统账户
+    qoscli query guardians
+
+
     //账户def是通过账户abc添加的特权账户
     qoscli tx add-guardian --address hij --creator def --description 'set hij to be a guardian'
+
+
+```
+
+## 预测结果
+
+```text
+    1. 查询系统账户前后，可查到新增的系统账户。
+    2. 添加特权账户成功，返回tx信息。
+    3. 添加特权账户失败，def不是存在genesis文件中的系统账户，权限不足。
 ```
 
 ## 测试结果

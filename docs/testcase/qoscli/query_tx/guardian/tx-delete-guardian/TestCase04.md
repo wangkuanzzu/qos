@@ -14,8 +14,21 @@
     //账户def是通过账户abc添加的特权账户
     qoscli tx delete-guardian --address hij --deleted-by def
 
+
+    //查询所有系统账户
+    qoscli query guardians
     //账户abc是配置在genesis.json文件中的特权账户
     qoscli tx delete-guardian --address def --deleted-by abc
+    //查询所有系统账户
+    qoscli query guardians
+```
+
+## 预测结果
+
+```text
+    1. 删除特权账户失败，def不是存在genesis文件中的系统账户，权限不足。
+    2. 删除特权账户成功，返回tx信息。
+    3. 查询特权账户，在删除操作前可查到def，删除之后查不到。
 ```
 
 ## 测试结果

@@ -1,43 +1,27 @@
 # Test Cases
 
-- 暂无
+- [缺失必须参数](./TestCase01.md)
+- [参数不合法](./TestCase02.md)
+- [正常投票提议](./TestCase03.md)
+- [业务情景](./TestCase04.md)
 
-# Description
+## Description
+
 >     vote.
-
+>
 >     向提案投票。
 
-# Example
+## Usage
 
-> 下面实例中假设:
-> - `Arya` 地址为: `address1ctmavdk57x0q7c9t98v7u79607222ars4qczcy`
-> - `Sansa` 地址为: `address1t7eadnyl8g6ct9xyrasvz4rdztvkeqpc0hzujh`
-
-进入投票阶段的提议可通过下面指令进行投票操作：
-
-`qoscli tx vote --proposal-id <proposal_id> --voter <voter_key_name_or_account_address> --option <vote_option>`
-
-主要参数：
-
-- `--proposal-id`       提议ID
-- `--voter`             投票账户，地址或密钥库名字
-- `--option`            投票选项，可选值：`Yes`,`Abstain`,`No`,`NoWithVeto`
-
-`Arya`给1号提议投票`Yes`：
-```bash
-$ qoscli tx vote --proposal-id 1 --voter Arya --option Yes
-```
-
-# Usage
 ```
   qoscli tx vote [flags]
 ```
 
-# Available Commands
+## Available Commands
 
 >无可用命令
 
-# Flags
+## Flags
 
 | ShortCut | Flag                | Required | Input Type | Default Input             | Input Range                                  | Description                                            |
 |:---------|:--------------------|:---------|:-----------|:--------------------------|:---------------------------------------------|:-------------------------------------------------------|
@@ -61,8 +45,7 @@ $ qoscli tx vote --proposal-id 1 --voter Arya --option Yes
 | -        | `--proposal-id`     | ✖        | uint       | -                         | -                                            | (主要参数)提案ID                                               |
 | -        | `--voter`           | ✖        | string     | -                         | -                                            | (主要参数)投票人                                                |
 
-
-# Global Flags
+## Global Flags
 
 | ShortCut | Flag         | Required | Input Type | Default Input | Input Range       | Description  |
 |:---------|:-------------|:---------|:-----------|:--------------|:------------------|:-------------|

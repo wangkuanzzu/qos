@@ -1,51 +1,27 @@
 # Test Cases
 
-- 暂无
+- [缺失必须参数](./TestCase01.md)
+- [参数不合法](./TestCase02.md)
+- [正常查询委托收益](./TestCase03.md)
+- [业务情景]暂无
 
-# Description
+## Description
+
 >     Query distribution delegator income info.
-
+>
 >     查询分发(distribution)委托人收入信息。
 
-# Example
+## Usage
 
-> 下面实例中假设:
-> - `Arya` 地址为: `address1ctmavdk57x0q7c9t98v7u79607222ars4qczcy`
-> - `Sansa` 地址为: `address1t7eadnyl8g6ct9xyrasvz4rdztvkeqpc0hzujh`
-
-`Sansa`查询代理给`Arya`的收益信息：
-```bash
-$ qoscli query delegator-income --owner Arya --delegator Sansa
-```
-
-查询结果：
-```bash
-{
-  "owner_address": "address1ctmavdk57x0q7c9t98v7u79607222ars4qczcy",
-  "validator_pub_key": {
-    "type": "tendermint/PubKeyEd25519",
-    "value": "VOn2rPx+t7Njdgi+eLb+jBuF175T1b7LAcHElsmIuXA="
-  },
-  "previous_validaotr_period": "1",
-  "bond_token": "100",
-  "earns_starting_height": "101",
-  "first_delegate_height": "1",
-  "historical_rewards": "0",
-  "last_income_calHeight": "101",
-  "last_income_calFees": "0"
-}
-```
-
-# Usage
 ```
   qoscli query delegator-income [flags]
 ```
 
-# Available Commands
+## Available Commands
 
 >无可用命令
 
-# Flags
+## Flags
 
 | ShortCut | Flag           | Required | Input Type | Default Input             | Input Range | Description                             |
 |:---------|:---------------|:---------|:-----------|:--------------------------|:------------|:----------------------------------------|
@@ -58,7 +34,7 @@ $ qoscli query delegator-income --owner Arya --delegator Sansa
 | -        | `--delegator`  | ✖        | string     | -                         | -           | (主要参数)委托人账户本地密钥库名字或账户地址                   |
 | -        | `--owner`      | ✖        | string     | -                         | -           | (主要参数)验证人节点的`owner`账户本地密钥库名字或账户地址         |
 
-# Global Flags
+## Global Flags
 
 | ShortCut | Flag         | Required | Input Type | Default Input | Input Range       | Description  |
 |:---------|:-------------|:---------|:-----------|:--------------|:------------------|:-------------|

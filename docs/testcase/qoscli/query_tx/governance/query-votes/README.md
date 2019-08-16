@@ -1,42 +1,27 @@
 # Test Cases
 
-- 暂无
+- [缺失必须参数`--id`](./TestCase01.md)
+- [参数`--id`不合法](./TestCase02.md)
+- [正常查询投票](./TestCase03.md)
+- [业务情景]暂无
 
-# Description
+## Description
+
 >     Query votes on a proposal. 
-
+>
 >     查询对指定提案(proposal)的投票(vote) 。
 
-# Example
+## Usage
 
-`qoscli query votes <proposal-id>`
-
-查询编号为1的提议上的所有投票：
-```bash
-$ qoscli query votes 1 --indent
-```
-
-查询结果：
-```bash
-[
-  {
-    "voter": "address1ctmavdk57x0q7c9t98v7u79607222ars4qczcy",
-    "proposal_id": "1",
-    "option": "Yes"
-  }
-]
-```
-
-# Usage
 ```
   qoscli query votes [proposal-id] [flags]
 ```
 
-# Available Commands
+## Available Commands
 
 >无可用命令
 
-# Flags
+## Flags
 
 | ShortCut | Flag           | Required | Input Type | Default Input             | Input Range | Description                             |
 |:---------|:---------------|:---------|:-----------|:--------------------------|:------------|:----------------------------------------|
@@ -47,7 +32,7 @@ $ qoscli query votes 1 --indent
 | `-n`     | `--node`       | ✖        | string     | `"tcp://localhost:26657"` | -           | 为此链提供的Tendermint RPC接口: `<host>:<port>` |
 | -        | `--trust-node` | ✖        | -          | -                         | -           | 是否信任连接的完整节点（不验证其响应证据）                   |
 
-# Global Flags
+## Global Flags
 
 | ShortCut | Flag         | Required | Input Type | Default Input | Input Range       | Description  |
 |:---------|:-------------|:---------|:-----------|:--------------|:------------------|:-------------|

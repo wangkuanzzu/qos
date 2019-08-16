@@ -1,6 +1,9 @@
 # Test Cases
 
-- 暂无
+- [缺失必须参数](./TestCase01.md)
+- [参数不合法](./TestCase02.md)
+- [正常操作验证节点](./TestCase03.md)
+- [业务情景](./TestCase04.md)
 
 # Description
 >     owner is a keystore name or account address.

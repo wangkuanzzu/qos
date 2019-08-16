@@ -3,6 +3,7 @@
 - [缺失必选参数`--receivers`和`--senders`](./TestCase01.md)
 - [指定的`--receivers`或`--senders`在密钥库中不存在](./TestCase02.md)
 - [指定密钥库中已存在的`--receivers`或`--senders`进行转账](./TestCase03.md)
+- [业务情景](./TestCase04.md)
 
 # Description
 >     Transfer QOS and QSCs.

@@ -1,66 +1,27 @@
 # Test Cases
 
-- 暂无
+- [缺失必须参数](./TestCase01.md)
+- [参数不合法](./TestCase02.md)
+- [正常抵押提议](./TestCase03.md)
+- [业务情景](./TestCase04.md)
 
-# Description
+## Description
+
 >     Submit proposal.
-
+>
 >     发起提案。
 
-# Example
+## Usage
 
-> 下面实例中假设:
-> - `Arya` 地址为: `address1ctmavdk57x0q7c9t98v7u79607222ars4qczcy`
-> - `Sansa` 地址为: `address1t7eadnyl8g6ct9xyrasvz4rdztvkeqpc0hzujh`
-
-`qoscli tx submit-proposal 
-    --title <proposal_title> 
-    --proposal-type <proposal_type> 
-    --proposer <proposer_key_name_or_account_address> 
-    --deposit <deposit_amount_of_qos> 
-    --description <description>`
-
-- `--title`             标题
-- `--proposal-type`     提议类型：`Text`、`ParameterChange`、`TaxUsage`
-- `--proposer`          提议账户，账户地址或密钥库中密钥名字
-- `--deposit`           提议押金，不能小于`MinDeposit`的三分之一
-- `--description`       描述信息
-
-`TaxUsage`类型提议特有参数：
-
-- `--dest-address`      目标地址，用于接收QOS
-- `--percent`           社区费池提取比例，小数0~1
-
-`ParameterChange`类型提议特有参数：
-
-- `--params`            参数列表，格式：'module:key_name:value,module:key_name:value，如：gov:min_deposit:10000
-
-
-`Arya`提交一个文本提议：
-```bash
-$ qoscli tx submit-proposal --title 'update qos' --proposal-type Text --proposer Arya --deposit 10000000 --description 'this is the description'
-```
-
-`Arya`提交一个参数修改提议：
-```bash
-$ qoscli tx submit-proposal --title 'update qos' --proposal-type ParameterChange --proposer Arya --deposit 10000000 --description 'this is the description' --params gov:min_deposit:1000
-```
-
-假设`Arya`在QOS初始化时已经通过[添加特权账户](qosd.md#添加特权账户) 添加到了`genesis.json`，`Arya`提交一个提取费池提议：
-```bash
-$ qoscli tx submit-proposal --title 'update qos' --proposal-type TaxUsage --proposer Arya --deposit 10000000 --description 'this is the description' --dest-address Sansa --percent 0.5
-```
-
-# Usage
 ```
   qoscli tx submit-proposal [flags]
 ```
 
-# Available Commands
+## Available Commands
 
 >无可用命令
 
-# Flags
+## Flags
 
 | ShortCut | Flag                | Required | Input Type | Default Input             | Input Range                                 | Description                                                  |
 |:---------|:--------------------|:---------|:-----------|:--------------------------|:--------------------------------------------|:-------------------------------------------------------------|
@@ -89,8 +50,7 @@ $ qoscli tx submit-proposal --title 'update qos' --proposal-type TaxUsage --prop
 | -        | `--proposer`        | ✖        | string     | -                         | -                                           | (主要参数)提交提案的提案人                                               |
 | -        | `--title`           | ✖        | string     | -                         | -                                           | (主要参数)提案标题                                                   |
 
-
-# Global Flags
+## Global Flags
 
 | ShortCut | Flag         | Required | Input Type | Default Input | Input Range       | Description  |
 |:---------|:-------------|:---------|:-----------|:--------------|:------------------|:-------------|

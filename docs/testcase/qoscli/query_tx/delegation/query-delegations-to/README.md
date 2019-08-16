@@ -1,52 +1,29 @@
 # Test Cases
 
-- 暂无
+- [缺失必须参数](./TestCase01.md)
+- [参数不合法](./TestCase02.md)
+- [正常查询委托](./TestCase03.md)
+- [业务情景]暂无
 
-# Description
+## Description
+
 >     Query all delegations made to one validator.
-
+>
 >     查询一个验证人所接收的所有委托。
 
-# Example
+## Usage
 
-> 下面实例中假设:
-> - `Arya` 地址为: `address1ctmavdk57x0q7c9t98v7u79607222ars4qczcy`
-> - `Sansa` 地址为: `address1t7eadnyl8g6ct9xyrasvz4rdztvkeqpc0hzujh`
-
-查询`Arya`验证节点上的所有代理信息：
-```bash
-$ qoscli query delegations-to Arya
-```
-
-查询结果示例：
-```bash
-[
-  {
-    "delegator_address": "address1t7eadnyl8g6ct9xyrasvz4rdztvkeqpc0hzujh",
-    "owner_address": "address1ctmavdk57x0q7c9t98v7u79607222ars4qczcy",
-    "validator_pub_key": {
-      "type": "tendermint/PubKeyEd25519",
-      "value": "VOn2rPx+t7Njdgi+eLb+jBuF175T1b7LAcHElsmIuXA="
-    },
-    "delegate_amount": "100",
-    "is_compound": false
-  }
-  ...
-]
-```
-
-# Usage
 ```
   qoscli query delegations-to [validator-owner] [flags]
 ```
 
 `[validator-owner]`为接受委托的验证人账户地址或密钥库中密钥名字
 
-# Available Commands
+## Available Commands
 
 >无可用命令
 
-# Flags
+## Flags
 
 | ShortCut | Flag           | Required | Input Type | Default Input             | Input Range | Description                             |
 |:---------|:---------------|:---------|:-----------|:--------------------------|:------------|:----------------------------------------|
@@ -57,7 +34,7 @@ $ qoscli query delegations-to Arya
 | `-n`     | `--node`       | ✖        | string     | `"tcp://localhost:26657"` | -           | 为此链提供的Tendermint RPC接口: `<host>:<port>` |
 | -        | `--trust-node` | ✖        | -          | -                         | -           | 是否信任连接的完整节点（不验证其响应证据）                   |
 
-# Global Flags
+## Global Flags
 
 | ShortCut | Flag         | Required | Input Type | Default Input | Input Range       | Description  |
 |:---------|:-------------|:---------|:-----------|:--------------|:------------------|:-------------|
