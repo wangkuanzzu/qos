@@ -79,8 +79,8 @@ func DefaultEvidenceParams() EvidenceParams {
 |endtime|阶段结束的时间，一个阶段结束，即进入下一阶段|--|--|--|
 |total_amount|该阶段共发行的qos数量|--|--|--|
 |applied_amount|标识本阶段已经分发的QOS数量|--|--|--|
-|first_block_time|第一个块的生成时间|--|--|--|
-|applied_qos_amount|已经发行的OQS的总数:社区池,每个通胀阶段已发行的QOS|--|--|--|
+|first_block_time|第一个块的生成时间|--|无法配置|--|
+|applied_qos_amount|已经发行的OQS的总数:社区池,每个通胀阶段已发行的QOS|--|根据初始化账户计算得出|--|
 |待定|全网一共会发行QOS的总量,该值为一个定值.|?|?|--|
 
 > 测试网络默认值:
@@ -153,11 +153,12 @@ func DefaultEvidenceParams() EvidenceParams {
 
 |参数名称|参数释义|测试网默认值|主网设定值|备注|
 |--|--|--|--|--|
-|max_validator_cnt|validator最大数目，白皮书指定为21|100|21|--|
+|max_validator_cnt|validator最大数目，白皮书指定为21|21|21|--|
 |voting_status_len|设定的一个投票高度,用于validator的活跃性检查|1000|?|--|
 |voting_status_least|设定的在投票高度内的最小的已投票块数|500|?|--|
-|survival_secs|处于inactive状态的validator的生存时间,单位s,在超出该时间后会将该validator状态转化成closed|600|?|在inactive状态的validator,不能进行区块验证，不能提交区块，不能获得挖矿收益和交易费用，不能达成代理合约。经过$survival_secs后将自动退出，失去其验证人身份。|
-|unbond_return_height|解除委托操作发起后,委托QOS不会立即返还,需要经过unbond_return_height个高度后,才能返还至委托人账户.|100|?|又称为冻结期,参数名称可能会修改.|
+|survival_secs|处于inactive状态的validator的生存时间,单位s,在超出该时间后会将该validator状态转化成closed|600|8小时|在inactive状态的validator,不能进行区块验证，不能提交区块，不能获得挖矿收益和交易费用，不能达成代理合约。经过$survival_secs后将自动退出，失去其验证人身份。|
+|unbond_return_height|解除委托操作发起后,委托QOS不会立即返还,需要经过unbond_return_height个高度后,才能返还至委托人账户.|100|运营确定|又称为冻结期,参数名称可能会修改.改名为：unbond_frozen_height|
+|redelegation_frozen_height||100|1天|又称为转委托冻结期|
 |validators|记录导出高度状态为active的validators|--|--|导出某一高度区块链数据形成genesis.json会填充此部分信息|
 |val_votes_info|记录导出高度状态为active的validator的votes信息|--|--|同上|
 |val_votes_in_window|记录在设定的投票窗口高度内validator的投票块数|--|--|同上|
@@ -381,11 +382,11 @@ func DefaultEvidenceParams() EvidenceParams {
 |delegators_earning_info|所有委托人获取的收益信息|见下示例|--|同上|
 |delegators_income_height|所有委托人获取收益的区块高度|见下示例|--|同上|
 |validator_eco_fee_pools|validator的获取的收益信息|见下示例|--|同上|
-|proposer_reward_rate|对于出块的验证人,他获得额外的收益：全网单块挖矿收益*该比例|0.04|?|--|
-|community_reward_rate|每一个区块中包含的QOS，将有该设定比例的QOS归属于社区基金|0.01|?|--|
+|proposer_reward_rate|对于出块的验证人,他获得额外的收益：全网单块挖矿收益 乘 该比例|0.04|0.01|--|
+|community_reward_rate|每一个区块中包含的QOS，将有该设定比例的QOS归属于社区基金|0.01|0.02|--|
 |validator_commission_rate|由于验证人付出了人力和物力，验证人可以从总收益中抽取一定比例的佣金，QOS网络中的验证人佣金是统一的，以该参数定义。|0.01|?|此参数后期会修改为:可由validator自行设置|
-|delegator_income_period_height|创建delegate后，由该参数定义之后的每多少块为一个分配周期，在每个周期交替时为委托人分配收益/处理请求。|100|?|--|
-|gas_per_unit_cost|每一个gas的单价,单位QOS.|10|?|gas费用=gas数量*gas单价|
+|delegator_income_period_height|创建delegate后，由该参数定义之后的每多少块为一个分配周期，在每个周期交替时为委托人分配收益/处理请求。|100|半小时|--|
+|gas_per_unit_cost|每一个gas的单价,单位QOS.|10|100|gas费用=gas数量 乘 gas单价；1GSA=0.000001QOS（1/100/10000）|
 
 > validators_history_period示例
 
