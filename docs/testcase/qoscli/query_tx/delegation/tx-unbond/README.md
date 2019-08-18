@@ -1,22 +1,14 @@
 # Test Cases
 
-- 暂无
+- [缺失必须参数](./TestCase01.md)
+- [参数不合法](./TestCase02.md)
+- [正常重新委托](./TestCase03.md)
+- [业务情景](./TestCase04.md)
 
 # Description
 >     unbond QOS from a validator.
 
 >     从验证人解除QOS委托。
-
-# Example
-
-> 下面实例中假设:
-> - `Arya` 地址为: `address1ctmavdk57x0q7c9t98v7u79607222ars4qczcy`
-> - `Sansa` 地址为: `address1t7eadnyl8g6ct9xyrasvz4rdztvkeqpc0hzujh`
-
-`Sansa`解除代理给`Arya`的50个QOS：
-```bash
-$ qoscli tx unbond --owner Arya --delegator Sansa --tokens 50
-```
 
 # Usage
 ```
