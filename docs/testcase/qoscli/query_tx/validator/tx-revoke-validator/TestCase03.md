@@ -1,6 +1,6 @@
-# test case of qoscli query validator*
+# test case of qoscli revoke-validator validator*
 
-> `qoscli query validator*` 查询验证节点
+> `qoscli revoke-validator validator*` 查询验证节点
 
 ---
 

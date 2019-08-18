@@ -3,6 +3,7 @@
 - [缺失必须参数`--from`，`--to`](./TestCase01.md)
 - [参数`--from`，`--to`不合法](./TestCase02.md)
 - [正常查询预授权](./TestCase03.md)
+- [业务场景]暂无
 
 # Description
 >     Query approve by from and to.

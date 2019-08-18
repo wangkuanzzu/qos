@@ -1,6 +1,6 @@
-# test case of qoscli query validator*
+# test case of qoscli create-validator validator*
 
-> `qoscli query validator*` 查询验证节点
+> `qoscli create-validator validator*`  创建验证节点
 
 ---
 

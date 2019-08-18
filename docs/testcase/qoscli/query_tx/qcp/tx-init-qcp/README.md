@@ -3,6 +3,7 @@
 - [缺失必须参数`--creator`，`--qcp.crt`](./TestCase01.md)
 - [参数`--creator`，`--qcp.crt`不合法](./TestCase02.md)
 - [正常初始化QCP联盟链](./TestCase03.md)
+- [业务情景](./TestCase04.md)
 
 # Description
 >     init qcp.

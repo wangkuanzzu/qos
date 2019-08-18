@@ -3,6 +3,7 @@
 - [缺失必须参数`--amount`，`--banker`，`--qsc-name`](./TestCase01.md)
 - [参数`--amount`，`--banker`，`--qsc-name`不合法](./TestCase02.md)
 - [正常发放QSC联盟币](./TestCase03.md)
+- [业务情景](./TestCase04.md)
 
 # Description
 >     issue qsc.
