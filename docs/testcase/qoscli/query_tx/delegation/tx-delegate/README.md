@@ -1,22 +1,16 @@
 # Test Cases
 
-- 暂无
+- [缺失必须参数](./TestCase01.md)
+- [参数不合法](./TestCase02.md)
+- [正常委托](./TestCase03.md)
+- [业务情景](./TestCase04.md)
 
 # Description
->     delegate QOS to a validator.
 
+>     delegate QOS to a validator.
+>
 >     向验证人委托QOS。
 
-# Example
-
-> 下面实例中假设:
-> - `Arya` 地址为: `address1ctmavdk57x0q7c9t98v7u79607222ars4qczcy`
-> - `Sansa` 地址为: `address1t7eadnyl8g6ct9xyrasvz4rdztvkeqpc0hzujh`
-
-`Sansa`将自己的100个QOS代理给`Arya`创建的验证节点：
-```bash
-$ qoscli tx delegate --owner Arya --delegator Sansa --tokens 100
-```
 
 # Usage
 ```
