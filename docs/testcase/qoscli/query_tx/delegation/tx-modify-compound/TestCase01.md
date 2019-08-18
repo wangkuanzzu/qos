@@ -7,12 +7,12 @@
 ## Input
 
 ```bash
-    qoscli tx delegate
+    qoscli tx modify-compound
 ```
 
 ## Output
 
 ```bash
-    qoscli tx delegate
+    qoscli tx modify-compound
     ERROR: required flag(s) "delegator", "owner" ,"tokens" not set
 ```
