@@ -11,12 +11,12 @@
 ## 测试命令
 
 ```bash
-    //验证revoke语句
+    //验证create语句
     qoscli query validator jlgy01
 
     qoscli tx create-validator --moniker jlgy --owner jlgy01 --tokens 2000000000
 
-    //验证revoke语句
+    //验证create语句
     qoscli query validator jlgy01
 ```
 
