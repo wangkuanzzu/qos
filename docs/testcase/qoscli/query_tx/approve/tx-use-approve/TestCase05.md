@@ -1,4 +1,4 @@
-# test case of qoscli tx create-approve 
+# test case of qoscli tx create-approve
 
 > `qoscli tx create-approve` 创建授权
 
