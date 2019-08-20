@@ -4,6 +4,7 @@
 - [指定的name在密钥库中已存在](./TestCase02.md)
 - [导入密钥库中不存在的密钥](./TestCase03.md)
 - [导入密钥库中不存在的密钥（从CA PRI文件导入）](./TestCase04.md)
+- [使用修改后的导出私钥](./TestCase05.md)
 
 # Description
 

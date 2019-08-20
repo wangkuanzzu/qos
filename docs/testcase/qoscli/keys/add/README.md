@@ -3,6 +3,8 @@
 - [缺失参数name](./TestCase01.md)
 - [添加新密钥](./TestCase02.md)
 - [使用种子短语恢复原有密钥](./TestCase03.md)
+- [测试场景](./TestCase04.md)
+- [测试场景](./TestCase05.md)
 
 # Description
 

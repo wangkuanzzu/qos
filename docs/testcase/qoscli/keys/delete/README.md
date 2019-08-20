@@ -3,6 +3,7 @@
 - [缺失参数name](./TestCase01.md)
 - [指定的name在密钥库中不存在](./TestCase02.md)
 - [删除已存在的密钥](./TestCase03.md)
+- [删除密钥测试情景](./TestCase04.md)
 
 # Description
 

@@ -4,6 +4,7 @@
 - [指定的name在密钥库中不存在](./TestCase02.md)
 - [导出已存在的密钥](./TestCase03.md)
 - [导出已存在的密钥（只导出公钥）](./TestCase04.md)
+- [导出已存在的密钥测试情景](./TestCase05.md)
 
 # Description
 
