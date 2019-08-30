@@ -22,6 +22,11 @@
     //验证create语句
     qoscli query validator jlgy01
 
+
+    qoscli query account acc0
+    qoscli query account acc0
+
+    qoscli query inflation-phrases --indent |grep 'applied_amount'
 ```
 
 ## 预测结果
@@ -42,4 +47,23 @@
 
     qoscli query validator jlgy01
     {"owner":"address1nnvdqefva89xwppzs46vuskckr7klvzk8r5uaa","validatorAddress":"6E713D1F3CCE28D820C39059E5D08D21D646FA8E","validatorPubkey":{"type":"tendermint/PubKeyEd25519","value":"exGS/yWJthwY8za4dlrPRid2I9KE4G15nlJwO/+Off8="},"bondTokens":"2000000000","description":{"moniker":"jlgy","logo":"","website":"","details":""},"status":"active","InactiveDesc":"","inactiveTime":"0001-01-01T00:00:00Z","inactiveHeight":"0","bondHeight":"617422"}
+
+
+    //360个高度会进行一次收益发放，此时高度在480，下次发放在720高度。
+    [vagrant@vagrant-192-168-1-200 ~]$ qoscli query account acc0
+    {"type":"qos/types/QOSAccount","value":{"base_account":{"account_address":"address1n64h6prxz6ld5vl8d0rrzsny25nq7vgcnrhu98","public_key":{"type":"tendermint/PubKeyEd25519","value":"m4lqygnU2mG19Fpf3vj2K618G2e2WMwtxu6GANARIVY="},"nonce":"5"},"qos":"5000752286911","qscs":null}}
+    //等待720高度，再次查询账户acc0  预估qos= 5001,504,573,822
+    [vagrant@vagrant-192-168-1-200 ~]$ qoscli query account acc0
+    {"type":"qos/types/QOSAccount","value":{"base_account":{"account_address":"address1n64h6prxz6ld5vl8d0rrzsny25nq7vgcnrhu98","public_key":{"type":"tendermint/PubKeyEd25519","value":"m4lqygnU2mG19Fpf3vj2K618G2e2WMwtxu6GANARIVY="},"nonce":"5"},"qos":"5001096596328","qscs":null}}
+
+    [vagrant@vagrant-192-168-1-200 ~]$ qoscli query inflation-phrases --indent |grep 'applied_amount'
+    "applied_amount": "1118975851"
+    "applied_amount": "0"
+    "applied_amount": "0"
+    "applied_amount": "0"
+    "applied_amount": "0"
+    "applied_amount": "0"
+    "applied_amount": "0"
 ```
+
+ps：收益可以看到从5000752286911至5001096596328，第一阶段的总通胀1118975851，1118975851-1096596328=22,379,523归属了社区基金池

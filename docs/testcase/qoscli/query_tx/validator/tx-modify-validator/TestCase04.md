@@ -78,4 +78,33 @@
     "inactiveHeight": "0",
     "bondHeight": "617422"
     }
+
+[vagrant@vagrant-192-168-1-200 ~]$ qoscli query account acc0
+{"type":"qos/types/QOSAccount","value":{"base_account":{"account_address":"address1n64h6prxz6ld5vl8d0rrzsny25nq7vgcnrhu98","public_key":{"type":"tendermint/PubKeyEd25519","value":"m4lqygnU2mG19Fpf3vj2K618G2e2WMwtxu6GANARIVY="},"nonce":"5"},"qos":"5001096596328","qscs":null}}
+
+[vagrant@vagrant-192-168-1-200 ~]$ qoscli tx modify-validator --moniker secondvalidator --owner acc0 --logo "http://pic32.nipic.com/20130813/3347542_160503703000_2.jpg" --website "https://github.com/" --details "update details"
+Password to sign with 'acc0':
+{"check_tx":{"gasWanted":"9223372036854775807","gasUsed":"26360","events":[]},"deliver_tx":{"gasWanted":"9223372036854775807","gasUsed":"39100","events":[{"type":"modify-validator","attributes":[{"key":"b3duZXI=","value":"YWRkcmVzczFuNjRoNnByeHo2bGQ1dmw4ZDBycnpzbnkyNW5xN3ZnY25yaHU5OA=="},{"key":"ZGVsZWdhdG9y","value":"YWRkcmVzczFuNjRoNnByeHo2bGQ1dmw4ZDBycnpzbnkyNW5xN3ZnY25yaHU5OA=="}]},{"type":"message","attributes":[{"key":"bW9kdWxl","value":"c3Rha2U="},{"key":"Z2FzLnBheWVy","value":"YWRkcmVzczFuNjRoNnByeHo2bGQ1dmw4ZDBycnpzbnkyNW5xN3ZnY25yaHU5OA=="}]}]},"hash":"7C107679F07B09178C77EE3921186BEE14D2A5D22D27740EA334A5A7549197E0","height":"886"}
+
+//高度为886
+[vagrant@vagrant-192-168-1-200 ~]$ qoscli query account acc0
+{"type":"qos/types/QOSAccount","value":{"base_account":{"account_address":"address1n64h6prxz6ld5vl8d0rrzsny25nq7vgcnrhu98","public_key":{"type":"tendermint/PubKeyEd25519","value":"m4lqygnU2mG19Fpf3vj2K618G2e2WMwtxu6GANARIVY="},"nonce":"6"},"qos":"5001096595937","qscs":null}}
+
+//在高度为1080之后，预估acc0的qos=5001496595937 
+[vagrant@vagrant-192-168-1-200 ~]$ qoscli query account acc0
+{"type":"qos/types/QOSAccount","value":{"base_account":{"account_address":"address1n64h6prxz6ld5vl8d0rrzsny25nq7vgcnrhu98","public_key":{"type":"tendermint/PubKeyEd25519","value":"m4lqygnU2mG19Fpf3vj2K618G2e2WMwtxu6GANARIVY="},"nonce":"6"},"qos":"5001440714560","qscs":null}}
+
+[vagrant@vagrant-192-168-1-200 ~]$ qoscli query inflation-phrases --indent |grep 'applied_amount'
+    "applied_amount": "1471092724"
+    "applied_amount": "0"
+    "applied_amount": "0"
+    "applied_amount": "0"
+    "applied_amount": "0"
+    "applied_amount": "0"
+    "applied_amount": "0"
+
 ```
+
+ps：
+    //执行编辑validator的交易消耗的5001096596328-5001096595937=391
+    此命令消耗的gas费用39100gas明显低于基础gas（0.18QOS=180000gas）消耗。

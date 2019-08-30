@@ -40,5 +40,19 @@
 ## 测试结果
 
 ```bash
+[vagrant@vagrant-192-168-1-200 ~]$ qoscli query proposals
+ERROR: no matching proposals found
+[vagrant@vagrant-192-168-1-200 ~]$ qoscli tx submit-proposal --title "myproposal" --proposal-type "Text" --proposer acc1 --deposit 8 --description "the first proposal"
+Password to sign with 'acc1':
+{"check_tx":{"gasWanted":"9223372036854775807","gasUsed":"16180","events":[]},"deliver_tx":{"gasWanted":"9223372036854775807","gasUsed":"82600","events":[{"type":"submit-proposal","attributes":[{"key":"cHJvcG9zYWwtaWQ=","value":"MQ=="},{"key":"cHJvcG9zZXI=","value":"YWRkcmVzczFmOWtrMzVwZ250ZnlnMGp2czdlODRtdWVtbXRuZzA1d2tlOTBoOA=="},{"key":"ZGVwb3NpdG9y","value":"YWRkcmVzczFmOWtrMzVwZ250ZnlnMGp2czdlODRtdWVtbXRuZzA1d2tlOTBoOA=="},{"key":"cHJvcG9zYWwtdHlwZQ==","value":"VGV4dA=="}]},{"type":"message","attributes":[{"key":"bW9kdWxl","value":"Z292"},{"key":"Z2FzLnBheWVy","value":"YWRkcmVzczFmOWtrMzVwZ250ZnlnMGp2czdlODRtdWVtbXRuZzA1d2tlOTBoOA=="}]}]},"hash":"54BFC7164D48B3B64BFB825685A51334892713B576F388D2BE91170D09066E7F","height":"1057"}
+[vagrant@vagrant-192-168-1-200 ~]$ qoscli query proposals
+[{"proposal_content":{"type":"gov/TextProposal","value":{"title":"myproposal","description":"the first proposal","deposit":"6"}},"proposal_id":"2","proposal_status":"Deposit","final_tally_result":{"yes":"0","abstain":"0","no":"0","no_with_veto":"0"},"submit_time":"2019-08-28T11:52:36.881898341Z","deposit_end_time":"2019-08-28T11:54:36.881898341Z","total_deposit":"6","voting_start_time":"0001-01-01T00:00:00Z","voting_start_height":"0","voting_end_time":"0001-01-01T00:00:00Z"}]
+[vagrant@vagrant-192-168-1-200 ~]$ qoscli query proposal 1
+
+{"proposal_content":{"type":"gov/TextProposal","value":{"title":"myproposal","description":"the first proposal","deposit":"6"}},"proposal_id":"2","proposal_status":"Deposit","final_tally_result":{"yes":"0","abstain":"0","no":"0","no_with_veto":"0"},"submit_time":"2019-08-28T11:52:36.881898341Z","deposit_end_time":"2019-08-28T11:54:36.881898341Z","total_deposit":"6","voting_start_time":"0001-01-01T00:00:00Z","voting_start_height":"0","voting_end_time":"0001-01-01T00:00:00Z"}
+
+[vagrant@vagrant-192-168-1-200 ~]$ qoscli tx submit-proposal --title "myproposal" --proposal-type "Text" --proposer acc1 --deposit 60 --description "the first proposal"
+[vagrant@vagrant-192-168-1-200 ~]$ qoscli query proposal 2
+{"proposal_content":{"type":"gov/TextProposal","value":{"title":"myproposal","description":"the first proposal","deposit":"60"}},"proposal_id":"1","proposal_status":"Voting","final_tally_result":{"yes":"0","abstain":"0","no":"0","no_with_veto":"0"},"submit_time":"2019-08-28T11:50:21.28546855Z","deposit_end_time":"2019-08-28T11:52:21.28546855Z","total_deposit":"60","voting_start_time":"2019-08-28T11:50:21.28546855Z","voting_start_height":"1057","voting_end_time":"2019-08-28T11:52:21.28546855Z"}
 
 ```
