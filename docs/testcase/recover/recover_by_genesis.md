@@ -13,7 +13,7 @@
 ## 测试步骤
 
     在启动全节点时候，初始化账户信息（满足量级：万）。
-    1. 节点init后，使用qosd add-genesis-accounts命令增加10000个初始账户，然后启动。增加参数：--pruning nothing 用于记录每个高度的状态保存下来。
+    1. 节点init后，使用qosd add-genesis-accounts命令增加10000个初始账户，然后启动。启动命令：qosd start --pruning nothing 用于记录每个高度的状态保存下来。
     2. 保证初始账户的所有qos合计为49亿。
 
     在节点运行中，停止qosd进程，开始导出从0到指定高度数据。
@@ -22,7 +22,7 @@
         > qosd export --for-zero-height --height 100000     预测结果：启动成功
         > qosd export --height 100000                       预测结果：启动失败
     3. 执行qosd unsafe-reset-all 完成以下操作：清空区块链数据库，地址表，重置priv_validator.json至创世状态
-    4. 将genesis文件首先备份，然后使用导出的genesis文件(注意名称修改为genesis.json)将其替换.
+    4. 将原始的genesis文件首先备份，然后使用导出的genesis文件(注意名称修改为genesis.json)将其替换.
         > 其实原来的genesis文件已经无用了，直接替换也是OK的。
         > genesis文件路径：$HOME/.qosd/config/genesis.json
     5. 执行qosd start
@@ -31,7 +31,7 @@
 ## 测试结果
 
     1、导出genesis文件中大约包含10000个账户，此时文件大约为2M。
-    2、使用两种导出方式得到的genesis文件，替换原来的文件，目前测试执行qosd start启动都正常。
+    2、使用两种导出方式得到的genesis文件，替换原来的文件，测试重启：执行qosd start启动都正常。
 
 ## 其他
 

@@ -81,7 +81,7 @@ func DefaultEvidenceParams() EvidenceParams {
 |applied_amount|标识本阶段已经分发的QOS数量|--|--|--|
 |first_block_time|第一个块的生成时间|--|无法配置|--|
 |applied_qos_amount|已经发行的OQS的总数:社区池,每个通胀阶段已发行的QOS|--|根据初始化账户计算得出|--|
-|待定|全网一共会发行QOS的总量,该值为一个定值.|?|?|--|
+|total_qos_amount|全网一共会发行QOS的总量,该值为一个定值.|100000000000000|100000000000000|--|
 
 > 测试网络默认值:
 
@@ -112,7 +112,8 @@ func DefaultEvidenceParams() EvidenceParams {
         ]
       },
       "first_block_time": "0",
-      "applied_qos_amount": "48970000000000"
+      "applied_qos_amount": "48970000000000",
+      "total_qos_amount": "100000000000000"
     }
 ```
 
@@ -145,7 +146,8 @@ func DefaultEvidenceParams() EvidenceParams {
         ]
       },
       "first_block_time": "0",
-      "applied_qos_amount": "48970000000000"
+      "applied_qos_amount": "48970000000000",
+      "total_qos_amount": "100000000000000"
     }
 ```
 
@@ -154,11 +156,11 @@ func DefaultEvidenceParams() EvidenceParams {
 |参数名称|参数释义|测试网默认值|主网设定值|备注|
 |--|--|--|--|--|
 |max_validator_cnt|validator最大数目，白皮书指定为21|21|21|--|
-|voting_status_len|设定的一个投票高度,用于validator的活跃性检查|1000|?|--|
-|voting_status_least|设定的在投票高度内的最小的已投票块数|500|?|--|
+|voting_status_len|设定的一个投票高度,用于validator的活跃性检查|1000|10000|--|
+|voting_status_least|设定的在投票高度内的最小的已投票块数|500|7000|--|
 |survival_secs|处于inactive状态的validator的生存时间,单位s,在超出该时间后会将该validator状态转化成closed|600|8小时|在inactive状态的validator,不能进行区块验证，不能提交区块，不能获得挖矿收益和交易费用，不能达成代理合约。经过$survival_secs后将自动退出，失去其验证人身份。|
-|unbond_return_height|解除委托操作发起后,委托QOS不会立即返还,需要经过unbond_return_height个高度后,才能返还至委托人账户.|100|运营确定|又称为冻结期,参数名称可能会修改.改名为：unbond_frozen_height|
-|redelegation_frozen_height||100|1天|又称为转委托冻结期|
+|unbond_frozen_height（保留）|解除委托操作发起后,委托QOS不会立即返还,需要经过unbond_frozen_height个高度后,才能返还至委托人账户.|15天|15天（需运营确认）|又称为冻结期,参数名称可能会修改.|
+|redelegation_frozen_height（删除）||15天|15天|又称为转委托冻结期|
 |validators|记录导出高度状态为active的validators|--|--|导出某一高度区块链数据形成genesis.json会填充此部分信息|
 |val_votes_info|记录导出高度状态为active的validator的votes信息|--|--|同上|
 |val_votes_in_window|记录在设定的投票窗口高度内validator的投票块数|--|--|同上|
@@ -383,9 +385,9 @@ func DefaultEvidenceParams() EvidenceParams {
 |delegators_income_height|所有委托人获取收益的区块高度|见下示例|--|同上|
 |validator_eco_fee_pools|validator的获取的收益信息|见下示例|--|同上|
 |proposer_reward_rate|对于出块的验证人,他获得额外的收益：全网单块挖矿收益 乘 该比例|0.04|0.01|--|
-|community_reward_rate|每一个区块中包含的QOS，将有该设定比例的QOS归属于社区基金|0.01|0.02|--|
+|community_reward_rate|每一个区块中包含的QOS，将有该设定比例的QOS归属于社区基金|0.01|0.02（需运营确认）|--|
 |validator_commission_rate|由于验证人付出了人力和物力，验证人可以从总收益中抽取一定比例的佣金，QOS网络中的验证人佣金是统一的，以该参数定义。|0.01|?|此参数后期会修改为:可由validator自行设置|
-|delegator_income_period_height|创建delegate后，由该参数定义之后的每多少块为一个分配周期，在每个周期交替时为委托人分配收益/处理请求。|100|半小时|--|
+|delegator_income_period_height|创建delegate后，由该参数定义之后的每多少块为一个分配周期，在每个周期交替时为委托人分配收益/处理请求。|100|一小时=60*60/5=720|--|
 |gas_per_unit_cost|每一个gas的单价,单位QOS.|10|100|gas费用=gas数量 乘 gas单价；1GSA=0.000001QOS（1/100/10000）|
 
 > validators_history_period示例
@@ -471,16 +473,26 @@ func DefaultEvidenceParams() EvidenceParams {
 |参数名称|参数释义|测试网默认值|主网设定值|备注|
 |--|--|--|--|--|
 |starting_proposal_id|提议的编号,下一个提议的index|1|1|--|
-|min_deposit|最小的抵押QOS数量,只有达到这个限制,提议才会进入voting阶段|100000000|?|--|
-|min_proposer_deposit_rate|提议者抵押QOS数量占min_deposit的比例 > 0.334(最小抵押比例),才能提议成功|0.334|?|--|
-|max_deposit_period|提议成功后,可以对该提议进行抵押QOS的时长.单位ns|7d=604800s|?|--|
-|voting_period|提议达到最小质押数量,进入voting阶段,该参数表示对该提议进行投票的时长|7d=604800s|?|--|
-|quorum|对提议进行vote的power占全网power的最小比例,达不到该比例,提议以不通过处理.|0.334|?|--|
-|threshold|对提议进行vote:yes的power占全网的比例 大于 0.5,提议以通过处理.|0.5|?|--|
-|veto|对提议进行vote:veto的power占全网power的比例 大于 0.334,提议以不通过处理.|0.334|?|--|
-|penalty|对提议不进行投票的validator的惩罚比例|0|?|--|
-|burn_rate|提议通过(PASS)或不通过(REJECT)都要进行销毁抵押Deposit * $burn_rate，作为治理费用，剩余的Deposit才会原路返回|0.2|?|--|
+|min_deposit|最小的抵押QOS数量,只有达到这个限制,提议才会进入voting阶段|100000000|100000,500000,1000000|--|
+|min_proposer_deposit_rate|提议者抵押QOS数量占min_deposit的比例 > 0.334(最小抵押比例),才能提议成功|0.334|0.334|--|
+|max_deposit_period|提议成功后,可以对该提议进行抵押QOS的时长.单位ns|7d=604800s|7d|--|
+|voting_period|提议达到最小质押数量,进入voting阶段,该参数表示对该提议进行投票的时长|14d=604800s|14d|--|
+|quorum|对提议进行vote的power占全网power的最小比例,达不到该比例,提议以不通过处理.|0.334|0.334|--|
+|threshold|对提议进行vote:yes的power占全网的比例 大于 0.5,提议以通过处理.|0.5|0.5|--|
+|veto|对提议进行vote:veto的power占全网power的比例 大于 0.334,提议以不通过处理.|0.334|0.334|--|
+|penalty|对提议不进行投票的validator的惩罚比例|0|0|--|
+|burn_rate|提议通过(PASS)或不通过(REJECT)都要进行销毁抵押Deposit * $burn_rate，作为治理费用，剩余的Deposit才会原路返回|0.2|0.2|--|
 |proposals|记录网络中发生的提议集合(提议已经完成voting阶段得到结果)|见下示例|--|--|
+
+> proposal提议等级划分及差异参数
+
+|ProposalType|level|min_deposit|remarks|
+|--|--|--|--|
+| ProposalTypeText|LevelNormal|100000||
+| ProposalTypeParameterChange|LevelImportant|500000||
+| ProposalTypeTaxUsage|LevelNormal|100000||
+| ProposalTypeModifyInflation|LevelCritical|1000000||
+| ProposalTypeSoftwareUpgrade|LevelCritical|1000000||
 
 > proposals示例:
 
