@@ -9,11 +9,11 @@
 |参数名称（无特殊说明参数类型均为string）|参数释义(en & cn)|自己节点|全节点部署推荐|备注|
 |--|--|--|--|--|
 |proxy_app|TCP or UNIX socket address of the ABCI application,or the name of an ABCI application compiled in with the Tendermint binary.<br>abci应用程序的TCP或UNIX套接字地址，或使用tendermint二进制文件编译的abci应用程序的名称。|tcp://127.0.0.1:26658|tcp://127.0.0.1:26658|--|
-|moniker|A custom human readable name for this node.<br>节点自定义的可读名称|--|--|-？？tendermint使用-|
-|fast_sync（bool）|If this node is many blocks behind the tip of the chain, FastSync allows them to catchup quickly by downloading blocks in parallel and verifying their commits. <br> 如果这个节点落后链的最新高度有许多块，那么fastsync允许它们通过并行下载块并验证它们的提交来快速捕获。|true|true|--|
-|db_backend|Database backend: leveldb or memdb or cleveldb<br>数据库后端选择：leveldb or memdb or cleveldb|leveldb|leveldb|-测试不同db的性能关系-|
+|moniker|A custom human readable name for this node.<br>节点自定义的可读名称|--|--|-在初始化节点信息时候设置：qosd init --moniker。初始化使用qoscli query status会展示moniker，该值是对一个节点的别名。-|
+|fast_sync（bool）|If this node is many blocks behind the tip of the chain, FastSync allows them to catchup quickly by downloading blocks in parallel and verifying their commits. <br>如果这个节点落后链的最新高度有许多块，那么fastsync允许它们通过并行下载块并验证它们的提交来快速捕获。|true|true|--|
+|db_backend|Database backend: goleveldb or cleveldb or boltdb<br>数据库后端选择：goleveldb or cleveldb or boltdb|goleveldb|goleveldb|-goleveldb:完全go实现，稳定。<br>cleveldb：速度块，使用Levigo包装，需要使用gcc进行编译，还支持tags构建。<br>boltdb:在某些情况下随机indexer读取最快，支持自身tags构建。对比建议使用goleveldb，原因我们项目使用go实现，兼容性最好，状态很稳定。-|
 |db_dir|Database directory<br>数据库目录|data|data|--|
-|log_level|Output level for logging, including package level options<br>日志记录的输出级别，包括包级别选项|main:info,state:info,`*`:error|main:info,state:info,`*`:error|-模块列表，在启动命令帮助中显示-|
+|log_level|Output level for logging, including package level options<br>日志记录的输出级别，包括包级别选项|main:info,state:info,`*`:error|main:info,state:info,`*`:error|-已知的模块：main，state，txindex，consensus，，已知的级别显示有："info", "debug", "error" or "none"-|
 |log_format|Output format: 'plain' (colored text) or 'json'<br>输出格式：plain带颜色文本 or json格式|plain|plain|--|
 
 ## additional base config options
@@ -23,27 +23,27 @@
 |genesis_file|Path to the JSON file containing the initial validator set and other meta data<br>包含初始验证人集合和其他元数据的json文件路径|config/genesis.json|config/genesis.json|--|
 |priv_validator_key_file|Path to the JSON file containing the private key to use as a validator in the consensus protocol<br>包含在共识协议中作为验证人的私钥信息的json文件路径|config/priv_validator_key.json|config/priv_validator_key.json|--|
 |priv_validator_state_file|Path to the JSON file containing the last sign state of a validator<br>包含验证人最后一个签名状态的JSON文件的路径|data/priv_validator_state.json|data/priv_validator_state.json|--|
-|priv_validator_laddr|TCP or UNIX socket address for Tendermint to listen on for connections from an external PrivValidator process<br>tendermint要侦听外部privvalidator进程的连接的TCP或UNIX套接字地址|||-？？？调用自己服务（地址）进行签名返回签名信息-|
+|priv_validator_laddr|TCP or UNIX socket address for Tendermint to listen on for connections from an external PrivValidator process<br>tendermint要侦听外部privvalidator进程的连接的TCP或UNIX套接字地址|||-在其他服务器启动签名服务，调用该处开放的地址和端口，完成签名操作，收到签名信息。-|
 |node_key_file|Path to the JSON file containing the private key to use for node authentication in the p2p protocol<br>包含p2p协议中用于节点身份验证的私钥的JSON文件的路径|config/node_key.json|config/node_key.json|--|
-|abci|Mechanism to connect to the ABCI application: socket or grpc<br>连接ABCI应用程序的机制：socket or grpc|socket|socket|-？？？-|
-|prof_laddr|TCP or UNIX socket address for the profiling server to listen on<br>要监听的资料服务器的TCP或UNIX套接字地址|localhost:6060|localhost:6060|-？？？-|
+|abci|Mechanism to connect to the ABCI application: socket or grpc<br>连接ABCI应用程序的机制：socket or grpc|socket|socket|-socket连接相较于grpc更加底层，面向的是tcp协议。而且在系统中grpc是为了开发者方便提供的，没有投入到生产使用中-|
+|prof_laddr|TCP or UNIX socket address for the profiling server to listen on<br>要监听的资料服务器的TCP或UNIX套接字地址|localhost:6060|localhost:6060|-开放该地址端口，供其他服务调用，读取节点服务器提供的资料信息。-|
 |filter_peers（bool）|If true, query the ABCI app on connecting to a new peer. so the app can decide if we should keep the connection or not.<br>如果为true，在连接到新的peer时候查询abci应用程序，应用程序来决定我们是否应该保持连接|false|false|--|
 
 ## rpc server configuration options（？？？）
 
 |参数名称（无特殊说明参数类型均为string）|参数释义(en & cn)|自己节点|全节点部署推荐|备注|
 |--|--|--|--|--|
-|laddr|TCP or UNIX socket address for the RPC server to listen on<br>要侦听的RPC服务器的TCP或UNIX套接字地址|tcp://127.0.0.1:26657|tcp://127.0.0.1:26657|-？？？-|
-|cors_allowed_origins|A list of origins a cross-domain request can be executed from Default value '[]' disables cors support Use '["*"]' to allow any origin<br>可以从中执行跨域请求的源列表，默认值“[]”禁用CORS支持，使用“[”*“]”允许任何来源|[]|[]|-？？？-|
+|laddr|TCP or UNIX socket address for the RPC server to listen on<br>要侦听的RPC服务器的TCP或UNIX套接字地址|tcp://127.0.0.1:26657|tcp://127.0.0.1:26657|-默认只有本机调用rpc服务，如有需要，修改地址为0.0.0.0，共其他服务调用节点服务器提供的rpc服务-|
+|cors_allowed_origins|A list of origins a cross-domain request can be executed from Default value '[]' disables cors support Use '[`*`]' to allow any origin<br>可以从中执行跨域请求的源列表，默认值“[]”禁用CORS支持，使用“[`*`]”允许任何来源|[]|[]|-存在跨域调用，其他网站在页面中调用我们rpc服务，首先浏览器本身是不允许的，在浏览器允许情况下，需要有非简单头部信息。-|
 |cors_allowed_methods|A list of methods the client is allowed to use with cross-domain requests<br>允许客户端与跨域请求一起使用的方法列表|["HEAD", "GET", "POST", ]|["HEAD", "GET", "POST", ]|--|
 |cors_allowed_headers|A list of non simple headers the client is allowed to use with cross-domain requests<br>允许客户端与跨域请求一起使用的非简单头列表|["Origin", "Accept", "Content-Type", "X-Requested-With", "X-Server-Time", ]|["Origin", "Accept", "Content-Type", "X-Requested-With", "X-Server-Time", ]|--|
-|grpc_laddr|TCP or UNIX socket address for the gRPC server to listen on. NOTE: This server only supports /broadcast_tx_commit<br>要侦听的GRPC服务器的TCP或UNIX套接字地址，此服务器只支持/broadcast_tx_commit|||-？？？-|
-|grpc_max_open_connections|Maximum number of simultaneous connections.If you want to accept a larger number than the default, make sure you increase your OS limits.<br>同时连接的最大数目。如果需要接受比默认值更大的数，那就需要增加操作系统的限制。|9000|900|Should be < {ulimit -Sn} - {MaxNumInboundPeers} - {MaxNumOutboundPeers} - {N of wal, db and other open files}. 1024 - 40 - 10 - 50 = 924 = ~900<br>测试9000个连接影响|
+|grpc_laddr|TCP or UNIX socket address for the gRPC server to listen on. NOTE: This server only supports /broadcast_tx_commit<br>要侦听的GRPC服务器的TCP或UNIX套接字地址，此服务器只支持/broadcast_tx_commit|||-开放grpc服务，方便开发者而开放的，在实际生产中没有-|
+|grpc_max_open_connections|Maximum number of simultaneous connections.If you want to accept a larger number than the default, make sure you increase your OS limits.<br>同时连接的最大数目。如果需要接受比默认值更大的数，那就需要增加操作系统的限制。|9000|900|Should be < {ulimit -Sn} - {MaxNumInboundPeers} - {MaxNumOutboundPeers} - {N of wal, db and other open files}. 1024 - 40 - 10 - 50 = 924 = ~900|
 |unsafe(bool)|Activate unsafe RPC commands like /dial_seeds and /unsafe_flush_mempool<br>激活不安全的RPC命令，如/dial_seeds和/unsafe_flush_mempool|false|false|--|
-|max_open_connections|Maximum number of simultaneous connections (including WebSocket). Does not include gRPC connections. See grpc_max_open_connections<br>同时连接的最大数目（包括WebSocket）。不包括GRPC连接。请参阅GRPC_max_open_connections|900|900|--|
-|max_subscription_clients(int)|Maximum number of unique clientIDs that can /subscribe. If you're using /broadcast_tx_commit, set to the estimated maximum number of broadcast_tx_commit calls per block.<br>可以/subscribe的唯一clientIDs的最大数目.如果你正在使用/broadcast_tx_commit，需要为每一块预估最大调用/broadcast_tx_commit的次数。|100|100|--|
-|max_subscriptions_per_client(int)|Maximum number of unique queries a given client can /subscribe to. If you're using GRPC (or Local RPC client) and /broadcast_tx_commit, set to the estimated # maximum number of broadcast_tx_commit calls per block.<br>给定客户端可以/subscribe to的唯一查询的最大数目。如果使用GRPC（或本地RPC客户端）和/broadcast_tx_commit，请设置为： 估计每块的最大broadcast_tx_commit 调用次数。|5|5|--|
-|timeout_broadcast_tx_commit|How long to wait for a tx to be committed during /broadcast_tx_commit. WARNING: Using a value larger than 10s will result in increasing the global HTTP write timeout, which applies to all connections and endpoints.<br>在调用/broadcast_tx_commit期间等待tx提交的时间。如果使用大于10s的值，会导致全局的http写入超时增加，这会适用于所有的连接和终结点。|10s|10s|--|
+|max_open_connections|Maximum number of simultaneous connections (including WebSocket). Does not include gRPC connections. See grpc_max_open_connections<br>同时连接的最大数目（包括WebSocket）。不包括GRPC连接。请参阅GRPC_max_open_connections|900|900|-不包含grpc的连接数目，供其他节点连接的socket数量，设置为其十倍左右（9000），测试其影响。-|
+|max_subscription_clients(int)|Maximum number of unique clientIDs that can /subscribe. If you're using /broadcast_tx_commit, set to the estimated maximum number of broadcast_tx_commit calls per block.<br>可以/subscribe的唯一clientIDs的最大数目.如果你正在使用/broadcast_tx_commit，需要为每一块预估最大调用/broadcast_tx_commit的次数。|100|100|-在向其他peer广播tx，最多有100个订阅广播的client。-|
+|max_subscriptions_per_client(int)|Maximum number of unique queries a given client can /subscribe to. If you're using GRPC (or Local RPC client) and /broadcast_tx_commit, set to the estimated # maximum number of broadcast_tx_commit calls per block.<br>给定客户端可以/subscribe to的唯一查询的最大数目。如果使用GRPC（或本地RPC客户端）和/broadcast_tx_commit，请设置为： 估计每块的最大broadcast_tx_commit 调用次数。|5|5|-对单个的订阅的client，调用broadcast_tx_commit的最大次数。-|
+|timeout_broadcast_tx_commit|How long to wait for a tx to be committed during /broadcast_tx_commit. WARNING: Using a value larger than 10s will result in increasing the global HTTP write timeout, which applies to all connections and endpoints.<br>在调用/broadcast_tx_commit期间等待tx提交的时间。如果使用大于10s的值，会导致全局的http写入超时增加，这会适用于所有的连接和终结点。|10s|10s|-还有一个全局的超时参数需要大于广播tx的超时时间。广播tx超时后，报错tx无法包含在区块中。-|
 |tls_cert_file|The name of a file containing certificate that is used to create the HTTPS server. If the certificate is signed by a certificate authority, the certFile should be the concatenation of the server's certificate, any intermediates, and the CA's certificate.<br>包含用于创建HTTPS服务器的证书的文件名。如果证书由证书颁发机构签名，那么证书文件应该是服务器证书、任何中间文件和CA证书的串联。|||both tls_cert_file and tls_key_file must be present for Tendermint to create HTTPS server. Otherwise, HTTP server is run.<br>必须同时存在tls_cert_file和tls_key_file，Tendermint才能创建HTTPS服务器。否则，将运行HTTP服务器。|
 |tls_key_file|The name of a file containing matching private key that is used to create the HTTPS server.<br>包含用于创建HTTPS服务器的匹配私钥的文件名。|||--|
 
@@ -51,13 +51,13 @@
 
 |参数名称（无特殊说明参数类型均为string）|参数释义(en & cn)|自己节点|全节点部署推荐|备注|
 |--|--|--|--|--|
-|laddr|Address to listen for incoming connections<br>监听向我们的连接请求的地址|tcp://0.0.0.0:26656|tcp://0.0.0.0:26656|--|
-|external_address|Address to advertise to peers for them to dial. If empty, will use the same port as the laddr, and will introspect on the listener or use UPnP to figure out the address.<br>向peers公布的地址，供他们拨号连接。如果为空，将使用与laddr相同的端口，并对监听器进行内省或使用upnp计算出地址。|||--|
+|laddr|Address to listen for incoming connections<br>监听向我们的连接请求的地址|tcp://0.0.0.0:26656|tcp://0.0.0.0:26656|-peer之间的通信的地址和端口-|
+|external_address|Address to advertise to peers for them to dial. If empty, will use the same port as the laddr, and will introspect on the listener or use UPnP to figure out the address.<br>向peers公布的地址，供他们拨号连接。如果为空，将使用与laddr相同的端口，并对监听器进行内省或使用upnp计算出地址。|||-该参数非空，其他peer在连接本peer时候会拨号求情该地址。-|
 |seeds|Comma separated list of seed nodes to connect to<br>要连接到的种子节点的逗号分隔列表||指定地址|--|
 |persistent_peers|Comma separated list of nodes to keep persistent connections to<br>要一直保持连接的peer的逗号分隔列表|||-可配置4-6个-|
-|upnp(bool)|UPNP port forwarding<br>UPNP端口转发|false|false|-？？？-|
+|upnp(bool)|UPNP port forwarding<br>UPNP端口转发|false|false|-如果本身你的节点处于外网中，该参数无意义。假设为内网机器，在开启upnp后，会将内网的某一端口直接映射到公网的端口，并且会发送消息至公网，说明我们加入到公网中。IP使用公网ip，端口一致。-|
 |addr_book_file|Path to address book<br>地址表文件路径|config/addrbook.json|config/addrbook.json|--|
-|addr_book_strict(bool)|Set true for strict address routability rules Set false for private or local networks<br>为严格的地址可路由性规则设置为真，为专用网络或本地网络设置为假|true|true|-？？？-|
+|addr_book_strict(bool)|Set true for strict address routability rules Set false for private or local networks<br>为严格的地址可路由性规则设置为真，为专用网络或本地网络设置为假|true|true|-node节点部署在公网时,设为true,否则设为false-|
 |max_num_inbound_peers(int)|Maximum number of inbound peers<br>允许其他节点连接我们节点的最大数目|40|?|--|
 |max_num_outbound_peers(int)|Maximum number of outbound peers to connect to, excluding persistent peers<br>我们节点向外节点连接的最大数目，不包含始终连接的peer数量|10|?|--|
 |flush_throttle_timeout|Time to wait before flushing messages out on the connection<br>在清除连接上的消息之前等待的时间|100ms|100ms|--|
@@ -93,8 +93,8 @@
 |timeout_prevote_delta|预投票超时后续增加时长，round*delta|500ms|500ms|--|
 |timeout_precommit|预提交超时初始时长|1s|1s|--|
 |timeout_precommit_delta|预提交超时后续增加时长，round*delta|500ms|500ms|--|
-|timeout_commit|提交超时初始时长|5s|5s|-？？？-|
-|skip_timeout_commit(bool)|Make progress as soon as we have all the precommits (as if TimeoutCommit = 0)<br>设置为true：当我们拥有了所有precommits，进入新一轮共识|false|false|--|
+|timeout_commit|提交超时初始时长|5s|5s|-该值目前无用，时间用来等待收取在提交块后剩余投票信息。-|
+|skip_timeout_commit(bool)|Make progress as soon as we have all the precommits (as if TimeoutCommit = 0)<br>设置为true：当我们拥有了所有precommits，进入新一轮共识|false|false|-启了SkipTimeoutCommit并且LastCommit（或precommits）拥有了所有投票，进入新一轮共识。-|
 |create_empty_blocks|EmptyBlocks mode and possible interval between empty blocks<br>是否允许打空块|true|true|--|
 |create_empty_blocks_interval|打空块的时间间隔|0s|0s|--|
 |peer_gossip_sleep_duration|Reactor sleep duration parameters<br>peer之间的数据交换休眠间隔|100ms|100ms|--|
@@ -105,7 +105,7 @@
 |参数名称（无特殊说明参数类型均为string）|参数释义(en & cn)|自己节点|全节点部署推荐|备注|
 |--|--|--|--|--|
 |indexer|1) "null" <br> 2) "kv" (default) - the simplest possible indexer, backed by key-value storage (defaults to levelDB; see DBBackend).<br>最简单的索引器，由键值存储支持（默认为leveldb；请参阅dbbackend）|kv|kv|--|
-|index_tags|It's recommended to index only a subset of tags due to possible memory bloat. This is, of course, depends on the indexer's DB and the volume of transactions.<br>指定tags用于创建kv索引|||-？？？-|
+|index_tags|It's recommended to index only a subset of tags due to possible memory bloat. This is, of course, depends on the indexer's DB and the volume of transactions.<br>指定tags用于创建kv索引|||-将tx中包含的tags创建成索引-|
 |index_all_tags(bool)|When set to true, tells indexer to index all tags (predefined tags: "tx.hash", "tx.height" and all tags from DeliverTx responses).<br>将DeliverTx中所有的tags用于创建kv索引|true|true|--|
 
 ## instrumentation configuration options
