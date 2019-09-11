@@ -48,3 +48,34 @@ data目录说明：
 
     1、数据拷贝后，在启动qosd，可以看到从停止那一刻高度开始继续打块共识。
     2、需要超过全网votingpower的2/3节点启动后，开始打块，不够的情况下无法打块。
+
+## 获取指定高度以下的data数据
+
+> 一、区块信息，交易信息等，不仅仅是指定高度当时的状态
+
+    步骤如下：
+    1. 指定一个信任的全节点，从该节点获取指定高度的data数据。假设高度为H
+    2. 重新启动一个全节点，同步信任的全节点数据，使用的是修改过源代码后编译的qosd程序（如何修改请看第二部分）。
+    3. 开始同步，由于使用的修改后的qosd程序，在同步到我们指定的高度H后，便会停止，此时我们便获取到想要的data数据。
+
+> 二、源代码修改
+
+    1. 使用目前主网使用的qos版本代码进行修改。
+    2. 找到文件：\github.com\QOSGroup\qos\app\app.go
+    3. 修改方法：BeginBlocker
+    4. 在return之前增加代码：if ctx.BlockHeight() > H { panic(ctx) }
+    5. 重新编译qosd程序。
+
+> 三、代码修改如下
+
+```go
+    func (app *QOSApp) BeginBlocker(ctx context.Context, req abci.RequestBeginBlock) abci.ResponseBeginBlock {
+
+        //测试同步至指定高度100，获取指定高度之下的data数据
+        if ctx.BlockHeight() > 100 {
+            panic(ctx)
+        }
+
+        return app.mm.BeginBlock(ctx, req)
+    }
+```
